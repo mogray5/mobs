@@ -1,55 +1,43 @@
--- Mob Api (20th Feb 2015)
+local path = minetest.get_modpath("mobs")
 
-dofile(minetest.get_modpath("mobs").."/api.lua")
+-- Food Chain
+dofile(path.."/food_types.lua")
 
--- Animals inc. Krupnovpavel's warthog/bee and JKmurray's chicken
+-- Mob Api
+dofile(path.."/api_behavior.lua")
+dofile(path.."/api_life_step.lua")
+dofile(path.."/api_step.lua")
+dofile(path.."/api_static_data.lua")
+dofile(path.."/api.lua")
 
-dofile(minetest.get_modpath("mobs").."/chicken.lua")
-dofile(minetest.get_modpath("mobs").."/cow.lua")
-dofile(minetest.get_modpath("mobs").."/rat.lua")
-dofile(minetest.get_modpath("mobs").."/sheep.lua")
-dofile(minetest.get_modpath("mobs").."/warthog.lua")
-dofile(minetest.get_modpath("mobs").."/bee.lua")
+
+-- Animals
+
+dofile(path.."/chicken.lua") -- JKmurray
+dofile(path.."/cow.lua") -- KrupnoPavel
+dofile(path.."/rat.lua") -- PilzAdam
+dofile(path.."/sheep.lua") -- PilzAdam
+dofile(path.."/warthog.lua") -- KrupnoPavel
+dofile(path.."/bee.lua") -- KrupnoPavel
+dofile(path.."/bunny.lua") -- ExeterDad
+dofile(path.."/kitten.lua") -- Jordach/BFD
 
 -- Monsters
 
-dofile(minetest.get_modpath("mobs").."/dirtmonster.lua")
-dofile(minetest.get_modpath("mobs").."/dungeonmaster.lua")
-dofile(minetest.get_modpath("mobs").."/oerkki.lua")
-dofile(minetest.get_modpath("mobs").."/sandmonster.lua")
-dofile(minetest.get_modpath("mobs").."/stonemonster.lua")
-dofile(minetest.get_modpath("mobs").."/treemonster.lua")
+dofile(path.."/dirtmonster.lua") -- PilzAdam
+dofile(path.."/dungeonmaster.lua")
+dofile(path.."/oerkki.lua")
+dofile(path.."/sandmonster.lua")
+dofile(path.."/stonemonster.lua")
+dofile(path.."/treemonster.lua")
+dofile(path.."/lava_flan.lua") -- Zeg9
+dofile(path.."/mese_monster.lua")
+dofile(path.."/spider.lua") -- AspireMint
 
--- Zmobs by Zeg9
+-- NPC
+dofile(path.."/npc.lua") -- TenPlus1
 
-dofile(minetest.get_modpath("mobs").."/lava_flan.lua")
-dofile(minetest.get_modpath("mobs").."/mese_monster.lua")
+-- Mob Items
+dofile(path.."/crafts.lua")
 
--- Spider from Lord of the Test - https://forum.minetest.net/viewtopic.php?pid=127538
-
-dofile(minetest.get_modpath("mobs").."/spider.lua")
-
--- Meat & Cooked Meat
-
-minetest.register_craftitem("mobs:meat_raw", {
-	description = "Raw Meat",
-	inventory_image = "mobs_meat_raw.png",
-	on_use = minetest.item_eat(3),
-})
-
-minetest.register_craftitem("mobs:meat", {
-	description = "Meat",
-	inventory_image = "mobs_meat.png",
-	on_use = minetest.item_eat(8),
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "mobs:meat",
-	recipe = "mobs:meat_raw",
-	cooktime = 5,
-})
-
-if minetest.setting_get("log_mods") then
-	minetest.log("action", "mobs loaded")
-end
+print ("[MOD] Mobs Redo loaded")

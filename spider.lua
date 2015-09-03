@@ -1,42 +1,40 @@
 
--- Glowtest Spider
+-- Spider by AspireMint (fishyWET (CC-BY-SA 3.0 license for texture)
 
 mobs:register_mob("mobs:spider", {
-	type = "monster",
+	type = "animal",
+	passive = false,
+	attack_type = "dogfight",
+	damage = 3,
 	hp_min = 20,
 	hp_max = 40,
+	armor = 200,
 	collisionbox = {-0.9, -0.01, -0.7, 0.7, 0.6, 0.7},
-	--textures = {"mobs_spider.png"},
-	available_textures = {
-		total = 1,
-		texture_1 = {"mobs_spider.png"},
-	},
-	visual_size = {x=7,y=7},
 	visual = "mesh",
 	mesh = "mobs_spider.x",
-	makes_footstep_sound = true,
-	view_range = 15,
+	textures = {
+		{"mobs_spider.png"},
+	},
+	visual_size = {x = 7, y = 7},
+	makes_footstep_sound = false,
+	sounds = {
+		random = "mobs_spider",
+		attack = "mobs_spider",
+	},
 	walk_velocity = 1,
 	run_velocity = 3,
-    armor = 200,
-	damage = 3,
+	jump = true,
+	view_range = 15,
+	floats = 0,
 	drops = {
 		{name = "farming:string",
-		chance = 1,
-		min = 1,
-		max = 5,},
+		chance = 1, min = 1, max = 5},
 		{name = "ethereal:crystal_spike",
-		chance = 15,
-		min = 1,
-		max = 2,},
+		chance = 15, min = 1, max = 2},
 	},
-    light_resistant = false,
-	drawtype = "front",
 	water_damage = 5,
 	lava_damage = 5,
 	light_damage = 0,
-	on_rightclick = nil,
-	attack_type = "dogfight",
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -49,25 +47,26 @@ mobs:register_mob("mobs:spider", {
 		punch_start = 50,
 		punch_end = 90,
 	},
-	sounds = {
-		random = "mobs_spider",
-	},
-	jump = true,
-	sounds = {},
-	step = 1,
-	floats = 0,
+	hunger = 1,
+  horny = false,
+  npc_food_types = {
+    type_1 = true,
+    type_2 = true,
+    type_3 = true
+   },
+  biome_food_types = {"mobs:egg"},
 })
-mobs:register_spawn("mobs:spider", {"default:desert_stone", "ethereal:crystal_topped_dirt"}, 5, -1, 7000, 1, 71)
+
+mobs:register_spawn("mobs:spider", {"default:desert_stone", "ethereal:crystal_topped_dirt", "default:dirt_with_grass","default:dirt", "ethereal:green_dirt"}, 20, 10, 15000, 1, 31000)
+
 mobs:register_egg("mobs:spider", "Spider", "mobs_cobweb.png", 1)
 
--- Ethereal crystal spike compatibility
-
+-- ethereal crystal spike compatibility
 if not minetest.get_modpath("ethereal") then
 	minetest.register_alias("ethereal:crystal_spike", "default:sandstone")
 end
 
--- Cobweb
-
+-- cobweb
 minetest.register_node("mobs:cobweb", {
 	description = "Cobweb",
 	drawtype = "plantlike",
@@ -83,7 +82,7 @@ minetest.register_node("mobs:cobweb", {
 	liquid_renewable = false,
 	liquid_range = 0,
 	walkable = false,
-	groups = {snappy=1,liquid=3},
+	groups = {snappy = 1, liquid = 3},
 	drop = "farming:cotton",
 	sounds = default.node_sound_leaves_defaults(),
 })

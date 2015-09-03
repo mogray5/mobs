@@ -1,56 +1,47 @@
 
--- Dungeon Master (This one spits out fireballs at you)
+-- Dungeon Master by PilzAdam
 
 mobs:register_mob("mobs:dungeon_master", {
 	type = "monster",
+	passive = false,
+	damage = 4,
+	attack_type = "shoot",
+	shoot_interval = 2.5,
+	arrow = "mobs:fireball",
+	shoot_offset = 1,
 	hp_min = 12,
 	hp_max = 35,
-	collisionbox = {-0.7, -0.01, -0.7, 0.7, 2.6, 0.7},
+	armor = 60,
+	collisionbox = {-0.7, -1, -0.7, 0.7, 1.6, 0.7},
 	visual = "mesh",
-	mesh = "mobs_dungeon_master.x",
-	--textures = {"mobs_dungeon_master.png"},
-	available_textures = {
-		total = 3,
-		texture_1 = {"mobs_dungeon_master.png"},
-		texture_2 = {"mobs_dungeon_master2.png"},
-		texture_3 = {"mobs_dungeon_master3.png"},
+	mesh = "mobs_dungeon_master.b3d",
+	textures = {
+		{"mobs_dungeon_master.png"},
+		{"mobs_dungeon_master2.png"},
+		{"mobs_dungeon_master3.png"},
 	},
-	visual_size = {x=8, y=8},
 	makes_footstep_sound = true,
-	view_range = 15,
+	sounds = {
+		random = "mobs_dungeonmaster",
+		attack = "mobs_fireball",
+	},
 	walk_velocity = 1,
 	run_velocity = 3,
-	damage = 4,
+	jump = true,
+	view_range = 15,
 	drops = {
 		{name = "default:mese_crystal_fragment",
-		chance = 1,
-		min = 1,
-		max = 3,},
+		chance = 1, min = 1, max = 3},
 		{name = "default:diamond",
-		chance = 4,
-		min = 1,
-		max = 1,},
+		chance = 4, min = 1, max = 1},
 		{name = "default:mese_crystal",
-		chance = 2,
-		min = 1,
-		max = 2,},
+		chance = 2, min = 1, max = 2},
 		{name = "default:diamond_block",
-		chance = 30,
-		min = 1,
-		max = 1,},
+		chance = 30, min = 1, max = 1},
 	},
-	armor = 60,
-	drawtype = "front",
 	water_damage = 1,
 	lava_damage = 1,
 	light_damage = 0,
-	on_rightclick = nil,
-	attack_type = "shoot",
-	arrow = "mobs:fireball",
-	shoot_interval = 2.5,
-	sounds = {
-		attack = "mobs_fireball",
-	},
 	animation = {
 		stand_start = 0,
 		stand_end = 19,
@@ -61,54 +52,36 @@ mobs:register_mob("mobs:dungeon_master", {
 		speed_normal = 15,
 		speed_run = 15,
 	},
-	sounds = {
-		random = "mobs_dungeonmaster",
-	},
-	jump = true,
-	step = 0.5,
-	shoot_offset = 0,
-	blood_texture = "mobs_blood.png",
 })
-mobs:register_spawn("mobs:dungeon_master", {"default:stone"}, 5, -1, 7000, 1, -70)
+
+mobs:register_spawn("mobs:dungeon_master", {"default:stone"}, 5, 0, 7000, 1, -70)
+
 mobs:register_egg("mobs:dungeon_master", "Dungeon Master", "fire_basic_flame.png", 1)
 
--- Fireball (weapon)
-
+-- fireball (weapon)
 mobs:register_arrow("mobs:fireball", {
 	visual = "sprite",
-	visual_size = {x=1, y=1},
+	visual_size = {x = 1, y = 1},
 	textures = {"mobs_fireball.png"},
-	velocity = 5,
+	velocity = 6,
 
 	-- direct hit, no fire... just plenty of pain
 	hit_player = function(self, player)
-		local s = self.object:getpos()
-		local p = player:getpos()
 		player:punch(self.object, 1.0,  {
-			full_punch_interval=1.0,
-			damage_groups = {fleshy=8},
-		}, 0) -- {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z})
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 8},
+		}, 0)
 	end,
 
-	-- node hit, bursts into flame (cannot blast through obsidian)
-	hit_node = function(self, pos, node)
+	hit_mob = function(self, player)
+		player:punch(self.object, 1.0,  {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 8},
+		}, 0)
+	end,
 
-		for dx=-1,1 do
-			for dy=-1,1 do
-				for dz=-1,1 do
-					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(p).name
-					if n ~= "default:obsidian"
-					and n ~= "default:obsidianbrick"
-					and not n:find("protector:") then	
-					if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <= 30 then
-						minetest.env:set_node(p, {name="fire:basic_flame"})
-					else
-						minetest.env:set_node(p, {name="air"})
-					end
-					end
-				end
-			end
-		end
+	-- node hit, bursts into flame
+	hit_node = function(self, pos, node)
+		mobs:explosion(pos, 1, 1, 0)
 	end
 })

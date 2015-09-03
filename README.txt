@@ -28,6 +28,23 @@ This mod contains the following additions:
 
 Changelog:
 
+1.16- Mobs follow multiple items now, Npc's can breed
+1.15- Added Feeding/Taming/Breeding function, right-click to pick up any sheep with X mark on them and replace with new one to fix compatibility.
+1.14- All .self variables saved in staticdata, Fixed self.health bug
+1.13- Added capture function (thanks blert2112) chance of picking up mob with hand; net; magic lasso, replaced some .x models with newer .b3d one's
+1.12- Added animal ownership so that players cannot steal your tamed animals
+1.11- Added flying mobs (and swimming), fly=true and fly_in="air" or "deafult:water_source" for fishy
+1,10- Footstep removed (use replace), explosion routine added for exploding mobs. 
+1.09- reworked breeding routine, added mob rotation value, added footstep feature, added jumping mobs with sounds feature, added magic lasso for picking up animals
+1.08- Mob throwing attack has been rehauled so that they can damage one another, also drops and on_die function added
+1.07- Npc's can now be set to follow player or stand by using self.order and self.owner variables
+beta- Npc mob added, kills monsters, attacks player when punched, right click with food to heal or gold lump for drop
+1.06- Changed recovery times after breeding, and time taken to grow up (can be sped up by feeding baby animal)
+1.05- Added ExeterDad's bunny's which can be picked up and tamed with 4 carrots from farming redo or farming_plus, also shears added to get wool from sheep and lastly Jordach/BSD's kitten
+1.04- Added mating for sheep, cows and hogs...  feed animals to make horny and hope for a baby which is half size, will grow up quick though :)
+1.03- Added mob drop/replace feature so that chickens can drop eggs, cow/sheep can eat grass/wheat etc.
+1.02- Sheared sheep are remembered and spawn shaven, Warthogs will attack when threatened, Api additions
+1.01- Mobs that suffer fall damage or die in water/lava/sunlight will now drop items
 1.0 - more work on Api so that certain mobs can float in water while some sink like a brick :)
 0.9 - Spawn eggs added for all mobs (admin only, cannot be placed in protected areas)...  Api tweaked
 0.8 - Added sounds to monster mobs (thanks Cyberpangolin for the sfx) and also chicken sound
