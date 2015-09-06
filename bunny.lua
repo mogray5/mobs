@@ -11,10 +11,9 @@ mobs:register_mob("mobs:bunny", {
 	visual = "mesh",
 	mesh = "mobs_bunny.b3d",
 	drawtype = "front",
-	textures = {
-		{"mobs_bunny_grey.png"},
-		{"mobs_bunny_brown.png"},
-		{"mobs_bunny_white.png"},
+	textures = {"mobs_bunny_grey.png",
+	     "mobs_bunny_brown.png",
+	     "mobs_bunny_white.png"
 	},
 	sounds = {},
 	makes_footstep_sound = false,

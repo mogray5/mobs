@@ -13,7 +13,7 @@ mobs:register_mob("mobs:spider", {
 	visual = "mesh",
 	mesh = "mobs_spider.x",
 	textures = {
-		{"mobs_spider.png"},
+    "mobs_spider.png"
 	},
 	visual_size = {x = 7, y = 7},
 	makes_footstep_sound = false,

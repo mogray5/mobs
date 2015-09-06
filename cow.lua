@@ -12,9 +12,7 @@ mobs:register_mob("mobs:cow", {
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
 	visual = "mesh",
 	mesh = "mobs_cow.x",
-	textures = {
-		{"mobs_cow.png"},
-	},
+	textures = {"mobs_cow.png"},
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_cow",

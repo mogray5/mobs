@@ -13,7 +13,7 @@ mobs:register_mob("mobs:lava_flan", {
 	visual = "mesh",
 	mesh = "zmobs_lava_flan.x",
 	textures = {
-		{"zmobs_lava_flan.png"},
+	     "zmobs_lava_flan.png"
 	},
 	blood_texture = "fire_basic_flame.png",
 	makes_footstep_sound = false,

@@ -13,7 +13,7 @@ mobs:register_mob("mobs:sand_monster", {
 	visual = "mesh",
 	mesh = "mobs_sand_monster.b3d",
 	textures = {
-		{"mobs_sand_monster.png"},
+    "mobs_sand_monster.png"
 	},
 	makes_footstep_sound = true,
 	sounds = {

@@ -13,7 +13,7 @@ mobs:register_mob("mobs:pumba", {
 	visual = "mesh",
 	mesh = "mobs_pumba.x",
 	textures = {
-		{"mobs_pumba.png"},
+		"mobs_pumba.png"
 	},
 	makes_footstep_sound = true,
 	sounds = {

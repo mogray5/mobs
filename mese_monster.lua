@@ -16,7 +16,7 @@ mobs:register_mob("mobs:mese_monster", {
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
 	textures = {
-		{"zmobs_mese_monster.png"},
+		"zmobs_mese_monster.png"
 	},
 	blood_texture = "default_mese_crystal_fragment.png",
 	makes_footstep_sound = false,

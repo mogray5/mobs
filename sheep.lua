@@ -17,9 +17,7 @@ for _, col in ipairs(all_colours) do
 		collisionbox = {-0.4, -1, -0.4, 0.4, 0.3, 0.4},
 		visual = "mesh",
 		mesh = "mobs_sheep.b3d",
-		textures = {
-			{"mobs_sheep_"..col..".png"},
-		},
+		textures = {"mobs_sheep_"..col..".png"},
 		gotten_texture = {"mobs_sheep_shaved.png"},
 		gotten_mesh = "mobs_sheep_shaved.b3d",
 		makes_footstep_sound = true,

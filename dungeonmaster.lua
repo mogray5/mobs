@@ -15,10 +15,9 @@ mobs:register_mob("mobs:dungeon_master", {
 	collisionbox = {-0.7, -1, -0.7, 0.7, 1.6, 0.7},
 	visual = "mesh",
 	mesh = "mobs_dungeon_master.b3d",
-	textures = {
-		{"mobs_dungeon_master.png"},
-		{"mobs_dungeon_master2.png"},
-		{"mobs_dungeon_master3.png"},
+	textures = {"mobs_dungeon_master.png",
+	         "mobs_dungeon_master2.png",
+		       "mobs_dungeon_master3.png",
 	},
 	makes_footstep_sound = true,
 	sounds = {

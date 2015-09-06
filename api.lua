@@ -7,7 +7,8 @@ local damage_enabled = minetest.setting_getbool("enable_damage")
 local peaceful_only = minetest.setting_getbool("only_peaceful_mobs")
 local disable_blood = minetest.setting_getbool("mobs_disable_blood")
 mobs.protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 1
-mobs.remove = minetest.setting_getbool("remove_far_mobs")
+--mobs.remove = minetest.setting_getbool("remove_far_mobs")
+mobs.remove = false
 
 function mobs:register_mob(name, def)
 	minetest.register_entity(name, {
@@ -82,7 +83,7 @@ function mobs:register_mob(name, def)
 		hunger = def.hunger,
     npc_food_types = def.npc_food_types,
     biome_food_types = def.biome_food_types,
-    mate_timer = 3,
+    mate_timer = 1,
     offspring = 3,
     -- Callbacks
 		do_attack = api_do_attack,

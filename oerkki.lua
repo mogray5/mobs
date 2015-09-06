@@ -13,8 +13,8 @@ mobs:register_mob("mobs:oerkki", {
 	visual = "mesh",
 	mesh = "mobs_oerkki.b3d",
 	textures = {
-		{"mobs_oerkki.png"},
-		{"mobs_oerkki2.png"},
+    "mobs_oerkki.png",
+		"mobs_oerkki2.png"
 	},
 	makes_footstep_sound = false,
 	sounds = {

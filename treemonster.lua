@@ -13,7 +13,7 @@ mobs:register_mob("mobs:tree_monster", {
 	visual = "mesh",
 	mesh = "mobs_tree_monster.b3d",
 	textures = {
-		{"mobs_tree_monster.png"},
+		"mobs_tree_monster.png"
 	},
 	blood_texture = "default_wood.png",
 	makes_footstep_sound = true,

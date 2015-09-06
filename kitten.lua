@@ -12,10 +12,10 @@ mobs:register_mob("mobs:kitten", {
 	visual_size = {x = 0.5, y = 0.5},
 	mesh = "mobs_kitten.b3d",
 	textures = {
-		{"mobs_kitten_striped.png"},
-		{"mobs_kitten_splotchy.png"},
-		{"mobs_kitten_ginger.png"},
-		{"mobs_kitten_sandy.png"},
+	   "mobs_kitten_striped.png",
+		"mobs_kitten_splotchy.png",
+		"mobs_kitten_ginger.png",
+		"mobs_kitten_sandy.png"
 	},
 	makes_footstep_sound = false,
 	sounds = {

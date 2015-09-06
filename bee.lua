@@ -10,9 +10,7 @@ mobs:register_mob("mobs:bee", {
 	collisionbox = {-0.2, -0.01, -0.2, 0.2, 0.2, 0.2},
 	visual = "mesh",
 	mesh = "mobs_bee.x",
-	textures = {
-		{"mobs_bee.png"},
-	},
+	textures = {"mobs_bee.png"},
 	makes_footstep_sound = false,
 	sounds = {
 		random = "mobs_bee",

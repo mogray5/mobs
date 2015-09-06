@@ -20,11 +20,11 @@ mobs:register_mob("mobs:npc", {
 	mesh = "character.b3d",
 	drawtype = "front",
 	textures = {
-		{"mobs_npc.png"},
-		{"mobs_npc2.png"}, -- female by nuttmeg20
+    "mobs_npc.png",
+		"mobs_npc2.png", -- female by nuttmeg20
 	},
 	child_texture = {
-		{"mobs_npc_baby.png"}, -- derpy baby by AmirDerAssassine
+		"mobs_npc_baby.png", -- derpy baby by AmirDerAssassine
 	},
 	makes_footstep_sound = true,
 	sounds = {},
@@ -93,6 +93,6 @@ mobs:register_mob("mobs:npc", {
 	end,
 })
 
---mobs:register_spawn("mobs:npc", {"default:dirt_with_grass"}, 20, 0, 7000, 1, 31000)
+mobs:register_spawn("mobs:npc", {"default:dirt_with_grass"}, 20, 0, 7000, 1, 31000)
 
 mobs:register_egg("mobs:npc", "Npc", "default_brick.png", 1)
