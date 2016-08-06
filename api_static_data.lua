@@ -3,7 +3,7 @@ function api_get_staticdata(theMob)
   -- remove mob when out of range unless tamed
   if mobs.remove and theMob.remove_ok and not theMob.tamed then
     print ("REMOVED", theMob.remove_ok, theMob.name)
-    theMob.object:remove()
+    --theMob.object:remove()
   end
   theMob.remove_ok = true
   theMob.attack = nil

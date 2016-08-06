@@ -1,8 +1,9 @@
--- Food Types --
+-- Food Types --f
 -- Large Game: 1
 -- Small Game: 2
 -- Wolf: 3
 -- Insects: 4
+-- Top Preditor: 5
 
 FOOD_TYPES = {
   mobs_sheep = 1,
@@ -28,7 +29,8 @@ FOOD_TYPES = {
   mobs_chicken = 2,
   mobs_bunny = 2,
   mobs_kitten = 3,
-  mobs_bee = 4
+  mobs_bee = 4,
+  mobs_spider = 5
 }
 
 REPLACEMENT_TYPES = {

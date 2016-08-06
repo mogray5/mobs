@@ -1,10 +1,10 @@
 function life_step(theMob, dtime)
 
-  if theMob.type ~= "animal" then
+  if theMob.type ~= "animal" and theMob.type ~= "npc" then
     return
   end
 
- -- print("life: dtime is " .. dtime)
+ -- minetest.log("info", "life: dtime is " .. dtime)
 
   theMob.mate_timer = theMob.mate_timer - dtime
 
@@ -18,9 +18,9 @@ function life_step(theMob, dtime)
     theMob.hunger = theMob.hunger + 1
   end
   
-  --print("life: mob " .. theMob.name .. " hunger is: " .. theMob.hunger .. " mate_timer is " .. theMob.mate_timer .. " offspring is " .. theMob.offspring)
+  --minetest.log("info", "life: mob " .. theMob.name .. " hunger is: " .. theMob.hunger .. " mate_timer is " .. theMob.mate_timer .. " offspring is " .. theMob.offspring)
 
-  theMob.horny = (theMob.hunger <= 5 and math.random(1, 10) <= 4 and theMob.mate_timer <= .001 and theMob.offspring > 0)
+  theMob.horny = (theMob.hunger <= 5 and math.random(1, 10) <= 5 and theMob.mate_timer <= .001 and theMob.offspring > 0)
 
   -- Hungry or horny
   if theMob.hunger > 5 or theMob.horny then
@@ -38,16 +38,16 @@ function life_step(theMob, dtime)
 
       if theMob.npc_food_types and theMob.hunger  > 5  and obj ~= nil then
 
-        --print("life: Checking food type " .. string.gsub(obj.name, ":", "_"))
+        --minetest.log("info", "life: Checking food type " .. string.gsub(obj.name, ":", "_"))
 
         ft = FOOD_TYPES[string.gsub(obj.name, ":", "_")]
         if ft then
-          --print("life: " .. obj.name .. " food type: " .. ft)
+          --minetest.log("info", "life: " .. obj.name .. " food type: " .. ft)
           if theMob.npc_food_types and ft then
             if theMob.npc_food_types["type_" .. ft] and theMob.hunger > 7 then
 
               -- Eat npc
-              --print("life: " .. obj.name .. " consumed")
+              minetest.log("action", "life: " .. obj.name .. " consumed")
 
               obj.object:remove()
 
@@ -70,7 +70,7 @@ function life_step(theMob, dtime)
 
         if theMob.horny and obj ~= nil then
 
-          --print ("life: mob " .. theMob.name .. " looking for mate")
+          --minetest.log("info", "life: mob " .. theMob.name .. " looking for mate")
 
           local selfpos = theMob.object:getpos()
           local matepos = obj.object:getpos()
@@ -81,7 +81,7 @@ function life_step(theMob, dtime)
             and (matepos.x + matepos.y + matepos.z) ~= (selfpos.x + selfpos.y + selfpos.z) then
 
             if math.random(1, 10) < 5 then
-              --print("life: mating " .. theMob.name)
+              minetest.log("info", "life: mating " .. theMob.name)
               theMob.offspring = theMob.offspring - 1
               local mob = minetest.add_entity(theMob.object:getpos(), theMob.name)
 
@@ -99,10 +99,10 @@ function life_step(theMob, dtime)
               obj.horny = false
               obj.mate_timer = 2
             else
-              --print("life: mate chance failed")
+              --minetest.log("info", "life: mate chance failed")
             end --end chance
           else
-            --print("life: obj horny?: " .. tostring(obj.horny))
+            --minetest.log("info", "life: obj horny?: " .. tostring(obj.horny))
           end --end obj horny
         end
 
@@ -124,7 +124,7 @@ function life_step(theMob, dtime)
 
       if fooditem ~= nil and fooditem.y <= pos.y then
 
-        --print("life: " .. theMob.name .. " consuming food item")
+        print("life: " .. theMob.name .. " consuming food item")
 
         local node = minetest.get_node(fooditem)
 
@@ -149,7 +149,7 @@ function life_step(theMob, dtime)
     -- Die from hunger?
     if theMob.hunger >= 10 then
       if math.random(1, 20) <= 5 then
-        --print("life: " .. theMob.name .. " died of hunger")
+        minetest.log("info", "life: " .. theMob.name .. " died of hunger")
         theMob.object:remove()
         return
       end

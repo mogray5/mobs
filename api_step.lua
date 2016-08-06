@@ -1,5 +1,14 @@
 function api_on_step(theMob, dtime)
 
+    -- life step 
+    
+    theMob.life_step_timer =  theMob.life_step_timer + dtime
+    
+  if theMob.life_step_timer > 4 then
+    theMob.life_step_timer = 0
+    life_step(theMob, dtime)
+  end
+    
   if theMob.type == "monster"
     and peaceful_only then
     theMob.object:remove()
@@ -7,8 +16,7 @@ function api_on_step(theMob, dtime)
   end
 
   -- if lifetimer run out and not npc; tamed or attacking then remove mob
-  if theMob.type ~= "npc"
-    and not theMob.tamed then
+  if not theMob.tamed then
     theMob.lifetimer = theMob.lifetimer - dtime
     if theMob.lifetimer <= 0
       and theMob.state ~= "attack" then
@@ -293,108 +301,6 @@ function api_on_step(theMob, dtime)
     end
   end
 
-  -- horny animal can mate for 40 seconds, afterwards horny animal cannot mate again for 200 seconds
-  if theMob.horny == true
-    and theMob.hornytimer < 240
-    and theMob.child == false then
-    theMob.hornytimer = theMob.hornytimer + 1
-    if theMob.hornytimer >= 240 then
-      theMob.hornytimer = 0
-      theMob.horny = false
-    end
-  end
-
-  -- if animal is child take 240 seconds before growing into adult
-  if theMob.child == true then
-    theMob.hornytimer = theMob.hornytimer + 1
-    if theMob.hornytimer > 240 then
-      theMob.child = false
-      theMob.hornytimer = 0
-      theMob.object:set_properties({
-        textures = theMob.textures,
-        mesh = theMob.mesh,
-        visual_size = theMob.base_size,
-        collisionbox = theMob.base_colbox,
-      })
-      -- jump when grown to now fall into ground
-      local v = theMob.object:getvelocity()
-      v.y = theMob.jump_height
-      v.x = 0 ; v.z = 0
-      theMob.object:setvelocity(v)
-    end
-  end
-
-  -- if animal is horny, find another same animal who is horny and mate
- --[[
-  if theMob.horny == true
-    and theMob.hornytimer <= 40 then
-    local pos = theMob.object:getpos()
-    effect({x = pos.x, y = pos.y + 1, z = pos.z}, 4, "heart.png")
-    local ents = minetest.get_objects_inside_radius(pos, theMob.view_range)
-    local num = 0
-    local ent = nil
-    for i,obj in ipairs(ents) do
-      ent = obj:get_luaentity()
-
-      -- check for same animal with different colour
-      local canmate = false
-      if ent then
-        if ent.name == theMob.name then
-          canmate = true
-        else
-          local entname = string.split(ent.name,":")
-          local theMobname = string.split(theMob.name,":")
-          if entname[1] == theMobname[1] then
-            entname = string.split(entname[2],"_")
-            theMobname = string.split(theMobname[2],"_")
-            if entname[1] == theMobname[1] then
-              canmate = true
-            end
-          end
-        end
-      end
-
-      if ent
-        and canmate == true
-        and ent.horny == true
-        and ent.hornytimer <= 40 then
-        num = num + 1
-      end
-      if num > 1 then
-        theMob.hornytimer = 41
-        ent.hornytimer = 41
-        minetest.after(7, function(dtime)
-          local mob = minetest.add_entity(pos, theMob.name)
-          local ent2 = theMob.object:get_luaentity()
-          local textures = theMob.textures
-          if theMob.child_texture then
-            textures = theMob.child_texture[1]
-          end
-          theMob.object:set_properties({
-            textures = textures,
-            visual_size = {
-              x = theMob.base_size.x / 2,
-              y = theMob.base_size.y / 2
-            },
-            collisionbox = {
-              theMob.base_colbox[1] / 2,
-              theMob.base_colbox[2] / 2,
-              theMob.base_colbox[3] / 2,
-              theMob.base_colbox[4] / 2,
-              theMob.base_colbox[5] / 2,
-              theMob.base_colbox[6] / 2
-            },
-          })
-          ent2.child = true
-          ent2.tamed = true
-          ent2.owner = theMob.owner
-        end)
-        num = 0
-        break
-      end
-    end
-  end
---]]
   -- find player to follow
   if (theMob.follow ~= ""
     or theMob.order == "follow")
@@ -486,8 +392,6 @@ function api_on_step(theMob, dtime)
 
   if theMob.state == "stand" then
   
-    -- life step 
-    life_step(theMob, dtime)
   
     -- randomly turn
     if math.random(1, 4) == 1 then
